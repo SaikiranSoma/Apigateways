@@ -39,7 +39,7 @@ namespace Products.Controllers
         public IActionResult AddProduct([FromBody] Product product) {
 
             _productRepository.AddProduct(product);
-            return Ok();
+            return Ok("Product Added Succesfully");
 
         }
 
@@ -59,6 +59,19 @@ namespace Products.Controllers
             return NotFound($"Product {id } not found");
         }
 
+
+        [HttpPut("{id}")]
+
+        public IActionResult UpdateProduct(Guid id, [FromBody] Product product)
+        {
+            var products = _productRepository.UpdateProduct(id, product);
+
+            if (product != null)
+            {
+                return Ok($"Product with {id} updated succesfuly");
+            }
+            return NotFound("Product not found");
+        }
 
     }
 }

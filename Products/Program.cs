@@ -18,7 +18,7 @@ builder.Services.AddDbContext<ProductDb>(option =>
 });
 
 
-builder.Services.AddSingleton<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 

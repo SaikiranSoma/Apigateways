@@ -1,34 +1,25 @@
-﻿using Products.Models;
+﻿using Products.Data;
+using Products.Models;
 
 namespace Products.Repository
 {
     public class ProductRepository : IProductRepository
     {
+        ProductDb _productDb;
 
 
-        //private readonly IProductRepository _repository;
-
-
-        private List<Product> _products = new List<Product>();
-
-        //bool IProductRepository.AddProduct { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-       // bool IProductRepository.DeleteProduct { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-
-
-        //public ProductRepository(IProductRepository repository)
-        //{
-        //    _repository = repository;
-        //}
-
+        public ProductRepository(ProductDb productDb)
+        {
+            _productDb = productDb;
+        }
         public IEnumerable<Product> GetAllProducts()
         {
-            return _products;
+            return _productDb.products.ToList();
         }
 
         public Product GetProductById(Guid id)
         {
-            var result = _products.FirstOrDefault(p => p.Id == id);
+            var result = _productDb.products.FirstOrDefault(p => p.Id == id);
 
             return result;
 
@@ -39,7 +30,8 @@ namespace Products.Repository
         {
            if(product == null) return false;
 
-           _products.Add(product);
+            _productDb.products.Add(product);
+            _productDb.SaveChanges();
             return true;
 
         }
@@ -47,28 +39,26 @@ namespace Products.Repository
 
         public bool DeleteProduct(Guid id)
         {
-            _products.Remove(GetProductById(id));
-            if (_products != null)
-            {
-                return true;
-            }
-            return false;
+            var result = _productDb.products.FirstOrDefault(p => p.Id == id);
+            _productDb.products.Remove((result));
+            return true;
         }
 
-        //public Guid UpdateProduct(Guid Id,Product product)
-        //{
-        //    var result=_products.FirstOrDefault(product => product.Id == product.Id);
+        public bool UpdateProduct(Guid Id, Product product)
+        {
+            var result = _productDb.products.FirstOrDefault(p => p.Id == Id);
 
-        //    if(result != null)
-        //    {
-        //        result.Name = product.Name;
-        //        result.Price = product.Price;
-              
-        //    }
+            if (result != null)
+            {
+                result.Name = product.Name;
+                result.Price = product.Price;
+                _productDb.SaveChanges();
+                return true;
+            }
 
-        //    return result.Id;
+            return false;
 
-        //}
+        }
 
 
 

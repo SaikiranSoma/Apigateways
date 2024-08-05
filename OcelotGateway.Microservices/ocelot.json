@@ -3,8 +3,10 @@
 
   "Routes": [
     {
+
+      //For products
       //Downstream
-      "DownstreamPathTemplate": "/api/Product",
+      "DownstreamPathTemplate": "/api/Product/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -15,8 +17,8 @@
 
 
       //upstream
-      "UpstreamPathTemplate": "/gateway/Product",
-      "upstreamHttpMethod": [ "Get" ]
+      "UpstreamPathTemplate": "/gateway/Product/{id}",
+      "upstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     },
 
     //For orders
