@@ -9,7 +9,7 @@ namespace OrdersApi.Controllers
     {
 
 
-
+        [HttpGet]
         public IActionResult GetOrders()
         {
             return Ok("Your orders");

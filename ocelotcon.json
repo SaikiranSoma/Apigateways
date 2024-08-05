@@ -1,0 +1,25 @@
+// JavaScript source code
+
+{
+  "Routes": [
+    {
+      //Downstream
+      "DownstreamPathTemplate": "/api/customer",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5000
+        }
+      ],
+
+
+      //upstream
+      "UpstreamPathTemplate": "/api/gateway/customer",
+      "upstreamHttpMethod": [ "Get", "Post" ]
+    }
+  ],
+  "GlobalConfiguration": {
+
+  }
+}

@@ -1,0 +1,48 @@
+// JavaScript source code
+{
+
+  "Routes": [
+    {
+      //Downstream
+      "DownstreamPathTemplate": "/api/Product",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+
+
+      //upstream
+      "UpstreamPathTemplate": "/gateway/Product",
+      "upstreamHttpMethod": [ "Get" ]
+    },
+
+    //For orders
+    {
+      //Downstream
+      "DownstreamPathTemplate": "/api/Order",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+
+
+      //upstream
+      "UpstreamPathTemplate": "/gateway/Order",
+      "upstreamHttpMethod": [ "Get" ]
+    }
+
+
+  ],
+  
+
+
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000"
+  }
+}
